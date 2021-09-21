@@ -1,0 +1,93 @@
+syntax = "proto3";
+package com.id.grpc;
+
+message SignUpRequest{
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message SignUpResponse{
+    string message = 1;
+}
+
+service SignUpService{
+    rpc SignUp(SignUpRequest) returns (SignUpResponse);
+}
+
+message SignInRequest{
+    string username = 1;
+    string password = 2;
+}
+
+message SignInResponse{
+    string answer =1;
+}
+
+service SignInService{
+    rpc SignIn(SignInRequest) returns (SignInResponse);
+}
+
+message CheckJwtRequest{
+    string bearer = 1;
+    int64 userId = 2;
+}
+
+message CheckJwtResponse{
+    bool valid = 1;
+    bool expiredToken = 2;
+}
+
+service CheckJwtService{
+    rpc CheckJwt(CheckJwtRequest) returns(CheckJwtResponse);
+}
+
+message RenewJwtRequest{
+    string token = 1;
+    int64  userId = 2;
+}
+
+message RenewJwtResponse{
+    string token = 1;
+}
+
+service RenewJwtService{
+    rpc Renew(RenewJwtRequest) returns(RenewJwtResponse);
+}
+
+message GetAllUserRequest{
+    int64 userId = 1;
+}
+
+message  GetAllUserResponse{
+    string json = 1;
+}
+
+service GetAllUserService{
+    rpc GetAllUser(GetAllUserRequest) returns(GetAllUserResponse);
+}
+
+message GetUserRequest{
+    int64 userId = 1;
+}
+
+message GetUserResponse{
+    string json = 1;
+}
+
+service GetUserService{
+    rpc GetUser(GetUserRequest) returns(GetUserResponse);
+}
+
+message UpdateUserRequest{
+    int64 userId = 1;
+    string json = 2;
+}
+
+message UpdateUserResponse{
+    string message = 1;
+}
+
+service UpdateUserService{
+    rpc UpdateUser(UpdateUserRequest) returns(UpdateUserResponse);
+}

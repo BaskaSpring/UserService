@@ -1,0 +1,230 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: baska
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(20)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(120)
+              - column:
+                  name: salt
+                  type: varchar(30)
+              - column:
+                  name: status_id
+                  type: BIGINT
+              - column:
+                  name: last_visit
+                  type: TIMESTAMP
+              - column:
+                  name: blocked_time
+                  type: TIMESTAMP
+              - column:
+                  name: count_wrong_password
+                  type: INT
+
+
+  - changeSet:
+      id: 2
+      author: baska
+      changes:
+        - createTable:
+            tableName: userstatus
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: status
+                  type: BIGINT
+              - column:
+                  name: change_user_id
+                  type: BIGINT
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+              - column:
+                  name: date_begin
+                  type: TIMESTAMP
+
+  - changeSet:
+      id: 3
+      author: baska
+      changes:
+        - createTable:
+            tableName: userstatusend
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: end_time
+                  type: TIMESTAMP
+
+  - changeSet:
+      id: 4
+      author: baska
+      changes:
+        - createTable:
+            tableName: tokendata
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: token_secret
+                  type: varchar(30)
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: expired_time
+                  type: TIMESTAMP
+
+  - changeSet:
+      id: 5
+      author: baska
+      changes:
+        - createTable:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+
+  - changeSet:
+      id: 6
+      author: baska
+      changes:
+        - createTable:
+            tableName: refreshtokens
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: refresh_token_secret
+                  type: varchar(30)
+              - column:
+                  name: token_id
+                  type: BIGINT
+
+  - changeSet:
+      id: 7
+      author: baska
+      changes:
+        - createTable:
+            tableName: group
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(150)
+              - column:
+                  name: parend_id
+                  type: BIGINT
+
+  - changeSet:
+      id: 8
+      author: baska
+      changes:
+        - createTable:
+            tableName: groupuser
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: group_id
+                  type: BIGINT
+
+  - changeSet:
+      id: 9
+      author: baska
+      changes:
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "ACTIVE"
+  - changeSet:
+      id: 10
+      author: baska
+      changes:
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "DELETED"
